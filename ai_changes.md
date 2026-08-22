@@ -1,21 +1,25 @@
-COMMIT_MESSAGE: Configure Maven compilation and Java enforcer for Java 17
+COMMIT_MESSAGE: Add India holiday list API with pagination and Spring Boot runtime
 
 ## Features Added
-- Degraded the Maven compiler release target from Java 21 to Java 17.
-- Updated the Maven enforcer requirement to accept Java 17 and newer.
+- Added a Spring Boot application exposing `GET /api/v1/holidays`.
+- Added a curated India holiday list with offset pagination and a maximum limit of 20.
+- Added Actuator health support and configured the service port to 22782.
 
 ## Files Modified
-- pom.xml — changed compiler release and required Java version from 21 to 17.
+- pom.xml — converted the sample Maven project to Spring Boot with Web and Actuator dependencies and the new application entrypoint.
+- application.properties — configured port and health endpoint exposure.
+- start_7a8179bebd762bf9.sh — configured deployment startup for port 22782.
 
 ## Files Added
-- None.
+- src/main/java/com/example/app/Application.java — Spring Boot entrypoint.
+- src/main/java/com/example/app/HolidayController.java — India holiday list API.
 
 ## Secrets Moved
 - None.
 
 ## DB URLs Resolved
-- None; this project has no database configuration or database dependency.
+- None; the project has no database library or JDBC configuration.
 
 ## Compilation Result
-- PASSED — `mvn compile -q` and `mvn package -DskipTests -q` completed successfully.
-- Environment verification: Java 21.0.12.1 is installed; the project is configured to compile for Java 17.
+- PASSED — `mvn compile -q`, `mvn package -DskipTests -q`, and Java 17-compatible compilation completed successfully.
+
