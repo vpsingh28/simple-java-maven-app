@@ -1,27 +1,34 @@
-COMMIT_MESSAGE: Degrade Maven project Java target to 1.8
+COMMIT_MESSAGE: Convert project to Gradle and add Indian city capital APIs
 
 ## Features Added
-- Updated the Maven project to compile and target Java 8 (1.8).
-- Kept the existing Spring Boot holiday API and actuator health endpoint unchanged in behavior.
-- Configured the application port as 23456.
+- Added Gradle build configuration for the Spring Boot application while retaining the Maven build configuration.
+- Added a paginated dummy Indian city list API at `GET /api/v1/cities` with offset pagination and a maximum limit of 20.
+- Added an all-city/capital API at `GET /api/v1/cities/capitals`.
+- Added a city lookup API at `GET /api/v1/cities/{cityName}`.
+- Added proper `404 Not Found` JSON handling for unknown cities.
+- Configured the application port as 21804 and exposed actuator health.
 
 ## Files Modified
-- pom.xml — changed the Spring Boot parent to the Java 8-compatible 2.7.18 line, set java.version to 1.8, configured compiler release 8, and added Spring Boot test support.
-- application.properties — changed server.port from 22782 to 23456.
-- ai_changes.md — documented this change and verification results.
+- `pom.xml` — updated the Maven compiler target to Java 17.
+- `application.properties` — configured port 21804.
+- `.gitignore` — added local Gradle/tool/build artifact exclusions.
+- `ai_changes.md` — documented the implementation and verification.
 
 ## Files Added
-- None.
+- `build.gradle` — Gradle Java/Spring Boot build configuration.
+- `settings.gradle` — Gradle project name configuration.
+- `src/main/java/com/example/app/City.java` — city/capital response model.
+- `src/main/java/com/example/app/CityController.java` — city endpoints.
+- `src/main/java/com/example/app/CityNotFoundException.java` — lookup exception.
 
 ## Secrets Moved
-- None.
+- None found.
 
 ## DB URLs Resolved
 - None; the project has no database library or JDBC configuration.
 
-## Test Results Summary
-- 2 PASSED, 0 FAILED, 0 SKIPPED.
-- `mvn compile -q` — passed.
-- `mvn package -DskipTests -q` — passed.
-- `mvn test` — passed; 2 tests run, 0 failures, 0 errors, 0 skipped.
+## Compilation Result
+- PASSED — `mvn compile -q`
+- PASSED — `mvn package -DskipTests -q`
+- Java runtime confirmed available via `java -version` (OpenJDK 21).
 
