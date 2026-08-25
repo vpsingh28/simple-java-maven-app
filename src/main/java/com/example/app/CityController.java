@@ -44,6 +44,11 @@ public class CityController {
         return ResponseEntity.ok(INDIAN_CITIES);
     }
 
+    @GetMapping("/hardcoded")
+    public ResponseEntity<List<City>> hardcodedCities() {
+        return ResponseEntity.ok(INDIAN_CITIES);
+    }
+
     @GetMapping("/{cityName}")
     public ResponseEntity<City> capitalForCity(@PathVariable String cityName) {
         return INDIAN_CITIES.stream()
